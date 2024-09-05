@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Catalog API
+  description: API for managing product catalogs in Reaction Commerce.
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      summary: List all products
+      operationId: listProducts
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+  /products/{id}:
+    get:
+      summary: Get a product by ID
+      operationId: getProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  price:
+                    type: number
+        '404':
+          description: Product not found

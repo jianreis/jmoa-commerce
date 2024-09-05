@@ -12,4 +12,4 @@ spec:
   lifecycle: production
   owner: product-team
   system: reaction-commerce
-  definition: https://github.com/jianreis/jmoa-commerce/blob/trunk/packages/api-plugin-catalogs/README.md
+  definition: https://github.com/jianreis/jmoa-commerce/blob/trunk/packages/api-plugin-catalogs/openapi.yaml
