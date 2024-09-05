@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: catalog-service
+  description: Manages product listings for the e-commerce platform.
+  tags:
+    - e-commerce
+    - catalog
+spec:
+  type: service
+  lifecycle: production
+  owner: product-team
+  system: jmoa-commerce

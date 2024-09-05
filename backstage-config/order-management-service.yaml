@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: order-management-service
+  description: Manages orders for the e-commerce platform.
+  tags:
+    - e-commerce
+    - orders
+spec:
+  type: service
+  lifecycle: production
+  owner: order-team
+  system: jmoa-commerce
