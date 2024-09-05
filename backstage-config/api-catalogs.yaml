@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: catalog-api
+  description: The API responsible for managing product catalogs in Reaction Commerce.
+  tags:
+    - e-commerce
+    - catalog
+    - api
+spec:
+  type: openapi
+  lifecycle: production
+  owner: product-team
+  system: reaction-commerce
+  definition: https://github.com/jianreis/jmoa-commerce/blob/trunk/packages/api-plugin-catalogs/README.md
