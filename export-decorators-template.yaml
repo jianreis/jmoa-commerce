@@ -1,0 +1,41 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: export-decorators
+  title: Export Decorators to YAML
+  description: Fetch Decorators for an entity and merge into its catalog-info.yaml via PR
+spec:
+  owner: default/engineering
+  type: service
+  parameters:
+    - title: Entity Reference
+      name: entityRef
+      description: Backstage entityRef (kind:namespace/name)
+      type: string
+    - title: Catalog Repository URL
+      name: repoUrl
+      description: Git URL of the catalog repo (HTTPS)
+      type: string
+  steps:
+    - id: fetchDecorations
+      name: Get Decorators
+      action: http:backstage:request
+      input:
+        method: GET
+        path: '/proxy/roadie/fragments?entityRef=${{ parameters.entityRef }}'
+    - id: mergeYaml
+      name: Merge into catalog-info.yaml
+      action: roadiehq:utils:merge
+      input:
+        path: ./catalog-info.yaml
+        content: ${{ steps.fetchDecorations.output.body.items[0].fragment }}
+        preserveYamlComments: true
+    - id: createPullRequest
+      name: Create Pull Request
+      action: publish:github:pull-request
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        branchName: 'roadie-sync-${{ randomString(6) }}'
+        title: 'Sync Roadie Decorators for ${{ parameters.entityRef }}'
+        description: |
+          Merges the latest Decorator metadata for ${{ parameters.entityRef }}
